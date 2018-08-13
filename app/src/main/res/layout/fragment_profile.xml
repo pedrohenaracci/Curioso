@@ -3,12 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".Fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/my_relativelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#ffffff">
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_Perfil"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="200dp"
+            android:padding="2dp"
+            android:background="#ff8a00">
+
+            <TextView
+                android:id="@+id/txt_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                />
+
+            <ImageView
+                android:id="@+id/img_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp" />
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/linearHr"
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
+            android:background="#00b0ff">
+
+            <LinearLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_user"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:padding="2dp"
+                android:src="@drawable/joao" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>

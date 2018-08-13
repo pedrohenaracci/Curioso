@@ -1,4 +1,4 @@
-package com.curioso.curiosoapp.Recycler;
+package com.curioso.curiosoapp.Adapters.Recycler;
 
 public interface ClickRecycler_Interface {
 
