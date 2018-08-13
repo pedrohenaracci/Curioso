@@ -1,25 +1,43 @@
 package com.curioso.curiosoapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.curioso.curiosoapp.Adapters.Recycler.ClickRecycler_Interface;
+import com.curioso.curiosoapp.Adapters.Recycler.FeedRecyclerAdapter;
 import com.curioso.curiosoapp.Adapters.ViewPager.ViewPagerAdapter;
 import com.curioso.curiosoapp.Fragment.CategoryFragment;
 import com.curioso.curiosoapp.Fragment.FeedFragment;
 import com.curioso.curiosoapp.Fragment.ProfileFragment;
+import com.curioso.curiosoapp.Model.News;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements ClickRecycler_Interface {
 
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     MenuItem prevItem;
     Fragment fragmentFeed,fragmentCategory,fragmentProfile;
+    private List<News> newsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRecyclerClick(Object object) {
+        News news = (News) object;
+    }
+
     private void ViewPagerSet(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentFeed = new FeedFragment();
@@ -92,6 +115,19 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(fragmentProfile);
         viewPager.setAdapter(viewPagerAdapter);
     }
+
+    public void RecyclerViewSet(){
+
+
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_feed);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        FeedRecyclerAdapter adapter = new FeedRecyclerAdapter(this,newsList,this);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+
 
     /*private boolean LoadFragment(android.support.v4.app.Fragment fragment){
         if(fragment != null){
