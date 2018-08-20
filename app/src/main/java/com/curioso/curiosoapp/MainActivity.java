@@ -1,7 +1,5 @@
 package com.curioso.curiosoapp;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,8 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -22,12 +20,7 @@ import com.curioso.curiosoapp.Fragment.FeedFragment;
 import com.curioso.curiosoapp.Fragment.ProfileFragment;
 import com.curioso.curiosoapp.Model.News;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //LoadFragment(new FeedFragment());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -128,15 +122,4 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
     }
 
 
-
-    /*private boolean LoadFragment(android.support.v4.app.Fragment fragment){
-        if(fragment != null){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.my_framelayout,fragment)
-                    .commit();
-            return true;
-        }
-        return  false;
-    }*/
 }
