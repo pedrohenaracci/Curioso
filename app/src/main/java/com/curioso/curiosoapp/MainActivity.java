@@ -1,5 +1,6 @@
 package com.curioso.curiosoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,6 +27,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ClickRecycler_Interface {
 
+    RecyclerView feedRecyclerView;
+    private FeedRecyclerAdapter adapter;
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     MenuItem prevItem;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
+        feedRecyclerView = (RecyclerView) findViewById(R.id.recycler_feed);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -94,11 +97,6 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
 
     }
 
-    @Override
-    public void onRecyclerClick(Object object) {
-        News news = (News) object;
-    }
-
     private void ViewPagerSet(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentFeed = new FeedFragment();
@@ -110,16 +108,13 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
         viewPager.setAdapter(viewPagerAdapter);
     }
 
-    public void RecyclerViewSet(){
-
-
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_feed);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        FeedRecyclerAdapter adapter = new FeedRecyclerAdapter(this,newsList,this);
-        mRecyclerView.setAdapter(adapter);
+    public void onItemClick(int position, List<News> listData) {
+        List<News> data = listData;
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("url",data.get(position).getLink());
+        startActivity(intent);
     }
+
 
 
 }

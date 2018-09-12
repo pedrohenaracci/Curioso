@@ -2,19 +2,39 @@ package com.curioso.curiosoapp.Model;
 
 public class News {
 
-    private String title;
-    private String desc;
-    private String image;
+    private String imagemURL;
+    private String link;
+    private String titulo;
 
-    public String getTitle() { return title; }
+    public News(){}
 
-    public void setTitle(String title) { this.title = title; }
+    public News(String imagemURL, String link, String titulo) {
+        this.imagemURL = imagemURL;
+        this.link = link;
+        this.titulo = titulo;
+    }
 
-    public String getDescription() { return desc; }
+    public String getImagemURL() {
+        return imagemURL;
+    }
 
-    public void setDescription(String description) { this.desc = description; }
+    public void setImagemURL(String imagemURL) {
+        this.imagemURL = imagemURL;
+    }
 
-    public String getImage() { return image; }
+    public String getLink() {
+        return link;
+    }
 
-    public void setImage(String image) { this.image = image; }
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 }
