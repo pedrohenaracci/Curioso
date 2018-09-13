@@ -1,39 +1,30 @@
 package com.curioso.curiosoapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-import com.curioso.curiosoapp.Adapters.Recycler.ClickRecycler_Interface;
-import com.curioso.curiosoapp.Adapters.Recycler.FeedRecyclerAdapter;
 import com.curioso.curiosoapp.Adapters.ViewPager.ViewPagerAdapter;
-import com.curioso.curiosoapp.Fragment.CategoryFragment;
+import com.curioso.curiosoapp.Fragment.FavoriteFragment;
 import com.curioso.curiosoapp.Fragment.FeedFragment;
 import com.curioso.curiosoapp.Fragment.ProfileFragment;
-import com.curioso.curiosoapp.Model.News;
 
+public class MainActivity extends AppCompatActivity {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements ClickRecycler_Interface {
-
-    RecyclerView feedRecyclerView;
-    private FeedRecyclerAdapter adapter;
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     MenuItem prevItem;
-    Fragment fragmentFeed,fragmentCategory,fragmentProfile;
-    private List<News> newsList = new ArrayList<>();
+    Fragment fragmentFeed, fragmentFavorite,fragmentProfile;
+    FrameLayout mFrameLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +34,22 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.my_viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        feedRecyclerView = (RecyclerView) findViewById(R.id.recycler_feed);
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                        mFrameLayout = findViewById(R.id.my_framelayout);
+
                         switch (item.getItemId()) {
                             case R.id.action_feed:
                                 viewPager.setCurrentItem(0);
                                 break;
-                            case R.id.action_category:
+                            case R.id.action_favorites:
                                 viewPager.setCurrentItem(1);
                                 break;
                             case R.id.action_profile:
@@ -100,20 +94,15 @@ public class MainActivity extends AppCompatActivity implements ClickRecycler_Int
     private void ViewPagerSet(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentFeed = new FeedFragment();
-        fragmentCategory = new CategoryFragment();
+        fragmentFavorite = new FavoriteFragment();
         fragmentProfile = new ProfileFragment();
         viewPagerAdapter.addFragment(fragmentFeed);
-        viewPagerAdapter.addFragment(fragmentCategory);
+        viewPagerAdapter.addFragment(fragmentFavorite);
         viewPagerAdapter.addFragment(fragmentProfile);
         viewPager.setAdapter(viewPagerAdapter);
     }
 
-    public void onItemClick(int position, List<News> listData) {
-        List<News> data = listData;
-        Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra("url",data.get(position).getLink());
-        startActivity(intent);
-    }
+
 
 
 

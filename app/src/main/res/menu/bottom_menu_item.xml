@@ -9,10 +9,10 @@
         android:title="@string/text_feed"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_category"
+        android:id="@+id/action_favorites"
         android:enabled="true"
-        android:icon="@drawable/ic_category_black_24dp"
-        android:title="@string/text_category"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="@string/text_favorites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_profile"

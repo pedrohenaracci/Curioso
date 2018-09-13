@@ -2,7 +2,7 @@
 
     <string name="app_name">Curioso</string>
     <string name="text_profile">Perfil</string>
-    <string name="text_category">Categoria</string>
+    <string name="text_favorites">Favoritos</string>
     <string name="text_feed">Feed</string>
 
 </resources>

@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="pure_white">#ffffff</color>
     <color name="orange_1">#ff8b40</color>
-    <color name="bluegray_gradient_end">#0529434e</color>
-    <color name="bluegray_grandient_start">#a329434e</color>
+    <color name="bluegray_gradient_end">#2729434e</color>
+    <color name="bluegray_grandient_start">#cb29434e</color>
 
 </resources>

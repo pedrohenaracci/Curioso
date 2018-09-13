@@ -25,10 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class FeedFragment extends android.support.v4.app.Fragment implements ClickRecycler_Interface {
+
+public class FeedFragment extends android.support.v4.app.Fragment{
 
     RecyclerView feedRecyclerView;
     FeedRecyclerAdapter feedAdapter;
@@ -43,7 +41,7 @@ public class FeedFragment extends android.support.v4.app.Fragment implements Cli
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
 
         feedRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_feed);
-        feedRecyclerView.setHasFixedSize(true);
+
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(
                 getContext(),
@@ -60,9 +58,10 @@ public class FeedFragment extends android.support.v4.app.Fragment implements Cli
         });
 
         feedRecyclerView.setLayoutManager(gridLayoutManager);
+        feedRecyclerView.setHasFixedSize(true);
         feedAdapter = new FeedRecyclerAdapter(getContext());
         feedRecyclerView.setAdapter(feedAdapter);
-        feedAdapter.setOnItemClickListener(FeedFragment.this);
+
 
         loadFirebase();
 
@@ -86,14 +85,5 @@ public class FeedFragment extends android.support.v4.app.Fragment implements Cli
             }
         });
     }
-
-
-
-    @Override
-    public void onItemClick(int position, List<News> listData) {
-
-    }
-
-
 }
 
