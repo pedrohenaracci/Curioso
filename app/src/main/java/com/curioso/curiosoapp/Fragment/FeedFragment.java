@@ -38,9 +38,9 @@ public class FeedFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        View v = inflater.inflate(R.layout.fragment_feed, container, false);
 
-        feedRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_feed);
+        feedRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_feed);
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(
@@ -65,7 +65,7 @@ public class FeedFragment extends android.support.v4.app.Fragment{
 
         loadFirebase();
 
-        return view;
+        return v;
     }
 
     public void loadFirebase(){
