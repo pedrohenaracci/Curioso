@@ -1,23 +1,29 @@
 package com.curioso.curiosoapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 
 import com.curioso.curiosoapp.Adapters.ViewPager.ViewPagerAdapter;
 import com.curioso.curiosoapp.Fragment.FavoriteFragment;
 import com.curioso.curiosoapp.Fragment.FeedFragment;
 import com.curioso.curiosoapp.Fragment.ProfileFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ProfileFragment.messageFragment {
 
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
@@ -25,14 +31,28 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragmentFeed, fragmentFavorite,fragmentProfile;
     FrameLayout mFrameLayout;
 
+    private FirebaseAuth mAuth;
+
+    private Boolean pass = true;
+
+    ProfileFragment profileFragment;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        profileFragment = (ProfileFragment) new ProfileFragment();
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
         viewPager = (ViewPager) findViewById(R.id.my_viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -103,7 +123,93 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+        updateUIDefault(currentUser);
+    }
+
+
+    private void updateUI(FirebaseUser user) {
+
+        //signOut.setVisibility(View.VISIBLE);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if (acct != null && pass == true) {
+            final String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            final String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            ProfileFragment profileFragment = new ProfileFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("name", personName);
+            profileFragment.setArguments(bundle);
 
 
 
+
+            onMessage("oi");
+
+
+
+
+
+/*            // Parseando os dados do usuário para tela de perfil
+            nome.setText(personName);
+            email.setText(personEmail);
+           */
+/* SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(IMG, personPhoto.toString());
+            editor.putString(NAME, personName);
+            editor.commit();*//*
+
+            Picasso.get().load(personPhoto.toString()).resize(300, 300).into(perfil);
+
+*/
+            Toast.makeText(this, personEmail, Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, "Usuário :" + personName + " Está conectado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateUIDefault (FirebaseUser user){
+        if (user != null && pass == false) {
+
+            String personEmail = user.getEmail();
+            String personId = user.getUid();
+
+
+
+            // Parseando os dados do usuário para tela de perfil
+
+           /* email.setText(personEmail);
+            nome.setText(personId);
+*/
+
+        } else {
+           /* mStatusTextView.setText(R.string.signed_out);
+            mDetailTextView.setText(null);
+
+            findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
+            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);*/
+        }
+
+
+
+    }
+
+
+    @Override
+    public void onMessage(String tal) {
+
+
+    }
 }
