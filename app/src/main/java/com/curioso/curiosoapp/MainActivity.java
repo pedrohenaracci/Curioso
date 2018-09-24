@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
 
 
 
-            onMessage("oi");
+
 
 
 
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
             Picasso.get().load(personPhoto.toString()).resize(300, 300).into(perfil);
 
 */
-            Toast.makeText(this, personEmail, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, personEmail, Toast.LENGTH_SHORT).show();
 
             Toast.makeText(this, "Usuário :" + personName + " Está conectado", Toast.LENGTH_SHORT).show();
         }
