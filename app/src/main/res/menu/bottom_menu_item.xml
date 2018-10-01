@@ -8,12 +8,7 @@
         android:icon="@drawable/ic_feed_black_24dp"
         android:title="@string/text_feed"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_favorites"
-        android:enabled="true"
-        android:icon="@drawable/ic_favorite_black_24dp"
-        android:title="@string/text_favorites"
-        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_profile"
         android:enabled="true"

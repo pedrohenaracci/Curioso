@@ -74,17 +74,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Botões de login Gmail
         signIn = (SignInButton)findViewById(R.id.sign_in_button);
         signIn.setOnClickListener(this);
-        disconnect = (Button) findViewById(R.id.disconnect_button2);
-        disconnect.setOnClickListener(this);
-
-
-        emailDefault = (EditText) findViewById(R.id.editTextEmail);
-        pwd = (EditText) findViewById(R.id.editTextPWD);
 
 
 
-        createAccount = (Button) findViewById(R.id.createAccount_button);
-        createAccount.setOnClickListener(this);
+
+
+
+
 
 
 
@@ -117,17 +113,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-       /* FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-        updateUIDefault(currentUser);*/
+        if(isUserAuthenticated() == true){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
 
-      /* if (!isUserAuthenticated()) {
-            return;
-       }else {
-           Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-           startActivity(intent);
-       }*/
+
+        }else {
+            signIn.setVisibility(View.VISIBLE);
+
+        }
     }
 
 
@@ -140,11 +135,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.disconnect_button2:
-                disconnect();
-                break;
-            case R.id.createAccount_button:
-                createAccount(emailDefault.getText().toString(),pwd.getText().toString());
         }
 
     }
@@ -200,6 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
+                            finish();
                             //updateUIDefault(user);
                         } else {
                             // If sign in fails, display a message to the user.

@@ -32,20 +32,34 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <ImageView
-                android:id="@+id/main.backdrop"
+                android:id="@+id/imgProfile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher"
                 app:layout_collapseMode="parallax" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ae000000"
+                android:orientation="horizontal"></LinearLayout>
+
             <Button
-                android:id="@+id/disconnect_button"
+                android:id="@+id/disconnect_profile"
                 style="@android:style/Widget.DeviceDefault.Button.Small"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/orange_1"
                 android:text="Disconnect" />
+
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@mipmap/ic_launcher_round" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -56,21 +70,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/nameUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
             android:padding="8dp"
             android:text="teste"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_margin="8dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_anchor="@id/main.appbar"
-        app:layout_anchorGravity="bottom|right|end"
-        />
 </android.support.design.widget.CoordinatorLayout>

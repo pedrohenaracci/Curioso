@@ -49,6 +49,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
                 List<News> data = newsList;
                 Intent intent = new Intent(context, WebViewActivity.class);
                 intent.putExtra("url",data.get(vHolder.getAdapterPosition()).getLink());
+                intent.putExtra("img",data.get(vHolder.getAdapterPosition()).getImagemURL());
+                intent.putExtra("title",data.get(vHolder.getAdapterPosition()).getTitulo());
                 context.startActivity(intent);
             }
         });

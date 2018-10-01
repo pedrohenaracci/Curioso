@@ -23,12 +23,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements ProfileFragment.messageFragment {
+import org.greenrobot.eventbus.EventBus;
+
+public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     MenuItem prevItem;
-    Fragment fragmentFeed, fragmentFavorite,fragmentProfile;
+    Fragment fragmentFeed,fragmentProfile;
     FrameLayout mFrameLayout;
 
     private FirebaseAuth mAuth;
@@ -69,11 +71,8 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
                             case R.id.action_feed:
                                 viewPager.setCurrentItem(0);
                                 break;
-                            case R.id.action_favorites:
-                                viewPager.setCurrentItem(1);
-                                break;
                             case R.id.action_profile:
-                                viewPager.setCurrentItem(2);
+                                viewPager.setCurrentItem(1);
                                 break;
                         }
                         return false;
@@ -114,10 +113,8 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
     private void ViewPagerSet(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentFeed = new FeedFragment();
-        fragmentFavorite = new FavoriteFragment();
         fragmentProfile = new ProfileFragment();
         viewPagerAdapter.addFragment(fragmentFeed);
-        viewPagerAdapter.addFragment(fragmentFavorite);
         viewPagerAdapter.addFragment(fragmentProfile);
         viewPager.setAdapter(viewPagerAdapter);
     }
@@ -130,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
         updateUIDefault(currentUser);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -161,6 +164,9 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
 
 
 
+
+
+
 /*            // Parseando os dados do usuário para tela de perfil
             nome.setText(personName);
             email.setText(personEmail);
@@ -175,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
 */
             //Toast.makeText(this, personEmail, Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(this, "Usuário :" + personName + " Está conectado", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Usuário :" + personName + " Está conectado", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -207,9 +213,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.m
     }
 
 
-    @Override
-    public void onMessage(String tal) {
 
 
-    }
+
 }

@@ -33,6 +33,7 @@ tools:context=".MainActivity">
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/pure_white"
         app:itemTextColor="@color/pure_white"

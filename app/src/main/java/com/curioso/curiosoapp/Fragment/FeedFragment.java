@@ -85,5 +85,11 @@ public class FeedFragment extends android.support.v4.app.Fragment{
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadFirebase();
+    }
 }
 
