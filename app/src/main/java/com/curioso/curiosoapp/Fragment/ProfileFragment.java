@@ -40,7 +40,6 @@ public class ProfileFragment extends Fragment {
     private Button disconnect;
 
 
-    private MainActivity mActivity;
     private FirebaseAuth mAuth;
 
 
@@ -88,7 +87,7 @@ public class ProfileFragment extends Fragment {
 
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
-                getActivity().onBackPressed();
+                getActivity().finish();
 
 
             }
