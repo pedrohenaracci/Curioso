@@ -45,7 +45,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
         vHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Cliquei: "+String.valueOf(vHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 List<News> data = newsList;
                 Intent intent = new Intent(context, WebViewActivity.class);
                 intent.putExtra("url",data.get(vHolder.getAdapterPosition()).getLink());
